@@ -10,6 +10,7 @@ public class Polygon {
     }
     public Polygon(int count){
         arr = new Point[count];
+
     }
 
     public void setPoint(int index, Point point) {
@@ -22,10 +23,13 @@ public class Polygon {
 
     public String toSvg() {
         String pointsString = "";
-        for(Point point : arr)
+        for(Point point : arr) {
             pointsString += point.x + "," + point.y + " ";
-
-        return String.format(Locale.ENGLISH,"<polygon points=\"%s\" />",
-                pointsString);
+        }
+        String styleString = "";
+        if (this.style != null) {
+            styleString = this.style.toSvg();
+            return String.format(Locale.ENGLISH, "<polygon points= \"%s\"%s />", pointsString, styleString);
+        }
     }
 }
